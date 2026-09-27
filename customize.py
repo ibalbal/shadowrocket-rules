@@ -22,14 +22,8 @@ def customize(text: str, raw_url: str) -> str:
             out.append(f"fallback-dns-server = {DNS}")
         elif line.startswith("dns-direct-system "):
             out.append("dns-direct-system = false")
-            out.append("direct-dns-server = 223.5.5.5")
-        elif line.startswith("direct-dns-server "):
-            continue
         elif line.startswith("hijack-dns "):
-            out.append(
-                "hijack-dns = 8.8.8.8:53,8.8.4.4:53,1.1.1.1:53,1.0.0.1:53,"
-                "114.114.114.114:53,223.6.6.6:53,119.29.29.29:53"
-            )
+            out.append("hijack-dns = *:53")
         elif "AI.list," in line and line.rstrip().endswith("🤖 AI 服务"):
             out.append(line.replace(",🤖 AI 服务", ",PROXY"))
         elif line.startswith("🤖 AI 服务 "):
