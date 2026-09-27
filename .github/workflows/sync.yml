@@ -1,0 +1,27 @@
+name: sync upstream
+
+on:
+  schedule:
+    - cron: "20 2 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: rebuild config
+        run: |
+          raw="https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/main/Shadowrocket.conf"
+          python3 customize.py "$raw" Shadowrocket.conf
+      - name: commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add Shadowrocket.conf
+          git diff --cached --quiet && exit 0
+          git commit -m "sync upstream Shadowrocket config"
+          git push
