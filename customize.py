@@ -50,15 +50,6 @@ def customize(text: str, raw_url: str) -> str:
             out.append("dns-direct-system = false")
         elif line.startswith("hijack-dns "):
             out.append("hijack-dns = *:53")
-        elif "AI.list," in line and line.rstrip().endswith("🤖 AI 服务"):
-            out.append(line.replace(",🤖 AI 服务", ",PROXY"))
-        elif line.startswith("🤖 AI 服务 "):
-            out.append(
-                line.replace(
-                    "policy-select-name=🇺🇸 美国节点",
-                    "policy-select-name=PROXY",
-                )
-            )
         elif line.startswith("🔍 谷歌服务 ") or line.startswith("📈 券商服务 "):
             if "policy-select-name=" in line:
                 line = line.split("policy-select-name=", 1)[0] + "policy-select-name=PROXY"

@@ -104,9 +104,9 @@ proxy-groups:
   - name: "🤖 AI 服务"
     type: select
     proxies:
-      - "PROXY"
       - "🇺🇸 美国节点"
       - "🚀 节点选择"
+      - "PROXY"
       - "DIRECT"
       - "REJECT"
 
@@ -429,7 +429,7 @@ rules:
   - "DOMAIN-SUFFIX,g.cn,🔍 谷歌服务"
   - "DOMAIN-SUFFIX,google.cn,🔍 谷歌服务"
   - "RULE-SET,Google,🔍 谷歌服务"
-  - "RULE-SET,AI,PROXY"
+  - "RULE-SET,AI,🤖 AI 服务"
   - "RULE-SET,YouTube,📹 油管视频"
   - "RULE-SET,BiliBili,🔒 国内服务"
   - "RULE-SET,Lan,🏠 私有网络"
