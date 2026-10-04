@@ -1,4 +1,4 @@
-# Clash Meta 配置，规则与 autocdk.com 一致。
+# Clash Meta 配置，规则与 Shadowrocket.conf 一致。
 # 给 Clash Verge、Mihomo Party、Stash 这类 Mihomo 内核使用。
 # 文件里没有节点。导入后在 PROXY 组选择节点，这就是小火箭首页当前节点。
 #
