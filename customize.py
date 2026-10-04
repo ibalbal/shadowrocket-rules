@@ -69,7 +69,7 @@ def customize(text: str, raw_url: str) -> str:
 
 def main() -> None:
     raw_url = sys.argv[1]
-    out_path = sys.argv[2] if len(sys.argv) > 2 else "Shadowrocket.conf"
+    out_path = sys.argv[2] if len(sys.argv) > 2 else "ibalbal.conf"
     with urllib.request.urlopen(UPSTREAM, timeout=60) as resp:
         text = resp.read().decode("utf-8")
     open(out_path, "w", encoding="utf-8").write(customize(text, raw_url))
