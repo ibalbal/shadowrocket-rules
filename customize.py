@@ -65,8 +65,6 @@ def customize(text: str, raw_url: str) -> str:
             else:
                 line = line.rstrip() + ",policy-select-name=PROXY"
             out.append(line)
-        elif line.startswith("IP-CIDR,208.54.0.0/16,"):
-            out.append("IP-CIDR,208.54.0.0/16,PROXY,no-resolve")
         else:
             out.append(line)
     return "\n".join(out) + "\n"
