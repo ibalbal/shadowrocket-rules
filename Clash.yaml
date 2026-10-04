@@ -104,8 +104,8 @@ proxy-groups:
   - name: "🤖 AI 服务"
     type: select
     proxies:
-      - "🇺🇸 美国节点"
       - "🚀 节点选择"
+      - "🇺🇸 美国节点"
       - "PROXY"
       - "DIRECT"
       - "REJECT"
