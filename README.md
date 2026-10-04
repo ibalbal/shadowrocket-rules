@@ -2,7 +2,7 @@
 
 一份可以给别人用的 [Shadowrocket](https://apps.apple.com/app/shadowrocket/id932747118) 配置。文件里没有节点、没有订阅、没有账号。导入后在首页加上你自己的节点或订阅，规则就会生效。
 
-总配置改自 [LingJingMaster/Shadowrocket-Rules](https://github.com/LingJingMaster/Shadowrocket-Rules)。`AI.list`、国内、谷歌这些名单仍放在上游和 [blackmatrix7/ios_rule_script](https://github.com/blackmatrix7/ios_rule_script)，由小火箭自己拉取。这个仓库只发布改过的 `Shadowrocket.conf`。
+总配置改自 [LingJingMaster/Shadowrocket-Rules](https://github.com/LingJingMaster/Shadowrocket-Rules)。`AI.list`、国内、谷歌这些名单仍放在上游和 [blackmatrix7/ios_rule_script](https://github.com/blackmatrix7/ios_rule_script)，由小火箭自己拉取。这个仓库发布改过的 `Shadowrocket.conf`，并另附一份同规则的 `Clash.yaml`。
 
 配置地址：
 
@@ -35,6 +35,30 @@ https://raw.githubusercontent.com/ibalbal/shadowrocket-rules/main/Shadowrocket.c
 6. 给节点做连通性测试，选一个能用的，打开首页开关。
 
 订阅和节点加在首页。本文件的 `[Proxy]` 是空的，更新配置时不会替你保管节点。
+
+## Clash
+
+同一套策略组和分流另存为 `Clash.yaml`，给 Clash Meta 内核用，包括 Clash Verge、Mihomo Party、Stash。经典 Clash Premium 不能用这份文件。
+
+```text
+https://raw.githubusercontent.com/ibalbal/shadowrocket-rules/main/Clash.yaml
+```
+
+1. 在客户端里新建配置，填上面的地址。
+2. 文件里没有节点。下载到本地后，打开 `proxy-providers` 那一段注释，填上你的订阅地址，再导入本地文件。节点会进入 `PROXY` 和各地区组。
+3. 打开 `PROXY` 组，选中要使用的节点。它对应小火箭首页当前节点。AI、漏网之鱼、非中国名单都看这个组。
+4. 其他策略组的默认出口和下面的表一致。
+
+Clash 没有小火箭的这几项，文件里是这样处理的：
+
+- `google.cn` 和 `g.cn` 不能自动跳到 `google.com`。这两条域名改为进入「谷歌服务」。
+- 上游名单里的 `USER-AGENT`，以及香港银行名单里的一条 `URL-REGEX`。Clash 加载时会跳过这些行，域名和 IP 规则还在。
+- 没有拦截代理连接的 QUIC。
+- 默认不打开 TUN，也不占用 53 端口。在客户端里打开 TUN 之后，才相当于小火箭接管整机流量并劫持 53 端口。
+
+DNS 按本仓库的写法：只问 Cloudflare DoH，并且这条查询走 `PROXY`。普通直连域名不问系统 DNS。`Shadowrocket.conf` 的 `[Host]` 里交给系统的名字仍走系统 DNS。节点自己的域名用 `1.1.1.1` 解析，避免解析和代理互相等待。
+
+每天 03:00 的自动同步只重写 `Shadowrocket.conf`，不会改 `Clash.yaml`。
 
 ## 首页节点和策略组
 
@@ -152,6 +176,7 @@ https://raw.githubusercontent.com/ibalbal/shadowrocket-rules/main/Shadowrocket.c
 | 文件 | 作用 |
 | --- | --- |
 | `Shadowrocket.conf` | 给小火箭导入的总配置 |
+| `Clash.yaml` | 同一套规则的 Clash Meta 配置 |
 | `customize.py` | 下载上游总配置，并改写更新地址、DNS、DNS 劫持和 AI 出口 |
 | `.github/workflows/sync.yml` | 每天北京时间 03:00 跑上面的脚本，有变化就提交 |
 
