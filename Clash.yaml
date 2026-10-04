@@ -121,10 +121,10 @@ proxy-groups:
   - name: "🔍 谷歌服务"
     type: select
     proxies:
+      - "PROXY"
       - "🇯🇵 日本节点"
       - "🇭🇰 香港节点"
       - "🚀 节点选择"
-      - "PROXY"
       - "DIRECT"
       - "REJECT"
 
@@ -199,10 +199,10 @@ proxy-groups:
   - name: "📈 券商服务"
     type: select
     proxies:
+      - "PROXY"
       - "🇭🇰 香港节点"
       - "DIRECT"
       - "🚀 节点选择"
-      - "PROXY"
       - "REJECT"
 
   - name: "🏠 私有网络"
@@ -421,7 +421,7 @@ rules:
   - "DOMAIN-SUFFIX,deepseek.com,🔒 国内服务"
   - "DOMAIN-SUFFIX,deepseeksvc.com,🔒 国内服务"
   - "AND,((NETWORK,TCP),(DST-PORT,5223)),🍎 苹果推送"
-  - "IP-CIDR,208.54.0.0/16,🇺🇸 美国节点,no-resolve"
+  - "IP-CIDR,208.54.0.0/16,PROXY,no-resolve"
   - "RULE-SET,BlockHttpDNS,🧱 DNS 防泄露"
   - "RULE-SET,Mail,📧 邮件服务"
   - "DOMAIN,translate.googleapis.com,📹 油管视频"
