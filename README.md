@@ -70,6 +70,11 @@ DNS 按本仓库的写法：只问 Cloudflare DoH，并且这条查询走 `PROXY
 
 **AI 不看「🤖 AI 服务」这个组。** `AI.list` 的出口写死为 `PROXY`。在策略组里改「AI 服务」，ChatGPT、Claude 以及其他命中这份名单的流量不会跟着变。要换 AI 的出口，在首页换节点。
 
+换好节点后，用浏览器打开下面两个页面，看当前出口：
+
+- [Claude 检测](https://ip.net.coffee/claude/)
+- [GPT 检测](https://ip.net.coffee/gpt/)
+
 其他服务可以在 **首页 → 策略组**（或配置里的策略组）里改。下面「默认」一列是导入后不做任何改动时的出口。
 
 | 策略组 | 默认 | 可以改成 |
